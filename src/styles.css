@@ -7,15 +7,15 @@
   width: min-content;
   margin-right: 10px;
 }
+/* .phase.stack {
+  margin-right: 0;
+} */
 .phase-title {
-  height: 35px;
+  min-height: 35px;
   margin-bottom: 10px;
 }
-.block-wrapper {
-  /* padding-bottom: 10px; */
-  /* height: 110px;
-  width: 110px; */
-  padding: 5px;
+.phase.stack .block {
+  width: 90px;
 }
 .block {
   height: 100px;
@@ -23,4 +23,21 @@
   margin-bottom: 10px;
   width: 100px;
   padding: 5px;
+}
+
+.block-wrapper {
+  width: min-content;
+}
+
+.block-wrapper .droppable {
+  height: 20px;
+}
+.droppable {
+  display: block;
+}
+.App[data-hide="stack"] .stack-droppable {
+  display: none;
+}
+.App[data-hide="phase"] .phase-droppable {
+  display: none;
 }
