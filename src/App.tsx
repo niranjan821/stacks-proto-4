@@ -165,20 +165,22 @@ export default function App() {
       return;
     }
     // Reorder blocks
-    if ((type === ItemTypes.BLOCK || type === "STACK")) {
+    if (type === ItemTypes.BLOCK || type === "STACK") {
       // Create stack
       if (combine) {
         const targetDroppable = phases[combine.droppableId];
 
         const sourceDroppable = phases[source.droppableId];
-        const targetIndex = targetDroppable.children.indexOf(combine.draggableId);
+        const targetIndex = targetDroppable.children.indexOf(
+          combine.draggableId,
+        );
         if (targetIndex !== -1) {
           const newStack: BlockOrStackType = {
             id: Math.random().toString(),
-            name: 'Stack',
+            name: "Stack",
             children: [draggableId, combine.draggableId],
-            type: 'STACK'
-          }
+            type: "STACK",
+          };
 
           targetDroppable.children.splice(targetIndex, 1, newStack.id);
           if (targetDroppable.id !== sourceDroppable.id) {
@@ -188,8 +190,8 @@ export default function App() {
           }
           blocks[newStack.id] = newStack;
 
-          setBlocks({...blocks});
-          setPhases({...phases});
+          setBlocks({ ...blocks });
+          setPhases({ ...phases });
         }
       } else if (destination) {
         // Handle insertion and deletion of block in stack
@@ -206,30 +208,30 @@ export default function App() {
           setPhases({ ...phases });
         } else {
           // Block reorder
-          if (type === 'STACK') {
+          if (type === "STACK") {
             const fromStack = blocks[source.droppableId];
 
             fromStack.children?.splice(source.index, 1);
             fromStack.children?.splice(destination.index, 0, draggableId);
             blocks[fromStack.id] = fromStack;
-            setBlocks({...blocks});
+            setBlocks({ ...blocks });
           } else {
             const clonedPhases = cloneDeep(phases);
-    
+
             const toPhaseId = destination.droppableId;
             const toPhase = clonedPhases[toPhaseId];
             const toIndex = destination.index;
-    
+
             const fromPhaseId = source.droppableId;
             const fromPhase = clonedPhases[source.droppableId];
             const fromIndex = source.index;
-    
+
             fromPhase.children.splice(fromIndex, 1);
             toPhase.children.splice(toIndex, 0, draggableId);
-    
+
             clonedPhases[fromPhaseId] = fromPhase;
             clonedPhases[toPhaseId] = toPhase;
-    
+
             setPhases(clonedPhases);
           }
         }
@@ -250,13 +252,13 @@ export default function App() {
   return (
     <DragDropContext
       onDragEnd={handleDragEnd}
-      onBeforeCapture={({ draggableId }) => {
-        const draggedBlockItem = blocks[draggableId];
-        if (draggedBlockItem) {
-          const attr = draggedBlockItem.type === 'STACK' ? 'stack' : 'phase';
-          document.querySelector('.App')?.setAttribute('data-hide', attr);
-        }
-      }}
+      // onBeforeCapture={({ draggableId }) => {
+      //   const draggedBlockItem = blocks[draggableId];
+      //   if (draggedBlockItem) {
+      //     const attr = draggedBlockItem.type === 'STACK' ? 'stack' : 'phase';
+      //     document.querySelector('.App')?.setAttribute('data-hide', attr);
+      //   }
+      // }}
     >
       <Droppable
         direction="horizontal"
