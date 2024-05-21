@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+}
+.phase {
+  background-color: aqua;
+  padding: 5px;
+  width: min-content;
+  margin-right: 10px;
+}
+.phase-title {
+  height: 35px;
+  margin-bottom: 10px;
+}
+.block-wrapper {
+  /* padding-bottom: 10px; */
+  /* height: 110px;
+  width: 110px; */
+  padding: 5px;
+}
+.block {
+  height: 100px;
+  background-color: azure;
+  margin-bottom: 10px;
+  width: 100px;
+  padding: 5px;
+}
